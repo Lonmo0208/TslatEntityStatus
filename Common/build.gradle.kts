@@ -33,7 +33,7 @@ neoForge {
 dependencies {
     compileOnly(libs.mixin)
     compileOnly(libs.mixinextras.common)
-    compileOnly(libs.forgeconfigapiport.common)
+    compileOnly(files(rootDir.resolve("forgeconfigapiport-common-neoforgeapi-21.5.1.jar")))
 }
 
 publishing {

@@ -48,7 +48,7 @@ dependencies {
     })
     modImplementation(libs.fabric)
     modImplementation(libs.fabric.api)
-    modImplementation(libs.forgeconfigapiport.fabric)
+    modImplementation(files(rootDir.resolve("ForgeConfigAPIPort-v21.5.1-1.21.5-Fabric.jar")))
     compileOnly(project(":common"))
 }
 
