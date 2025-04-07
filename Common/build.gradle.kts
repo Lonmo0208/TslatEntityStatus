@@ -36,6 +36,7 @@ dependencies {
     compileOnly(files(rootDir.resolve("forgeconfigapiport-common-neoforgeapi-21.5.1.jar")))
 }
 
+
 publishing {
     publishing {
         publications {

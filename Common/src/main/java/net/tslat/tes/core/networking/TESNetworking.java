@@ -48,6 +48,7 @@ public interface TESNetworking {
 	 * @param toAdd The effects to add to the entity's state on the client side
 	 * @param toRemove The effects to remove from the entity's state on the client side
 	 */
+
 	void sendEffectsSync(LivingEntity targetedEntity, Set<Holder<MobEffect>> toAdd, Set<Holder<MobEffect>> toRemove);
 
 	/**
@@ -57,6 +58,7 @@ public interface TESNetworking {
 	 * @param position The position the particle should appear at
 	 * @param contents The contents of the particle. If sending a numeric value, use one of the double-based methods
 	 */
+
 	void sendParticle(ServerLevel level, Vector3f position, Component contents);
 
 	/**
@@ -65,6 +67,7 @@ public interface TESNetworking {
 	 * @param targetedEntity The entity the particle should appear on
 	 * @param contents The contents of the particle. If sending a numeric value, use one of the double-based methods
 	 */
+
 	void sendParticle(LivingEntity targetedEntity, Component contents);
 
 	/**
@@ -75,6 +78,7 @@ public interface TESNetworking {
 	 * @param value    The value of the particle
 	 * @param colour   The text colour of the particle
 	 */
+
 	void sendParticle(ServerLevel level, Vector3f position, double value, int colour);
 
 	/**
@@ -84,6 +88,7 @@ public interface TESNetworking {
 	 * @param value The value of the particle
 	 * @param colour The text colour of the particle
 	 */
+
 	void sendParticle(LivingEntity targetedEntity, double value, int colour);
 
 	/**
@@ -93,10 +98,12 @@ public interface TESNetworking {
 	 * @param targetedEntity The entity for the claim
 	 * @param additionalData Optional additional data for the claim
 	 */
+
 	void sendParticleClaim(ResourceLocation claimantId, LivingEntity targetedEntity, Optional<CompoundTag> additionalData);
 
 	// <-- Internal methods --> //
 
+	@ApiStatus.Internal
 	static void init() {
 		registerPacket(NewComponentParticlePacket.TYPE, NewComponentParticlePacket.CODEC, Direction.CLIENTBOUND);
 		registerPacket(NewNumericParticlePacket.TYPE, NewNumericParticlePacket.CODEC, Direction.CLIENTBOUND);
@@ -106,19 +113,33 @@ public interface TESNetworking {
 		registerConfigurationPacket(ServerConnectionAckPacket.TYPE, ServerConnectionAckPacket.CODEC, Direction.BIDIRECTIONAL);
 	}
 
-	static <B extends FriendlyByteBuf, P extends MultiloaderPacket> void registerPacket(CustomPacketPayload.Type<P> payloadType, StreamCodec<B, P> codec, Direction direction) {
+	@ApiStatus.Internal
+	static <B extends FriendlyByteBuf, P extends MultiloaderPacket> void registerPacket(
+			CustomPacketPayload.Type<P> payloadType,
+			StreamCodec<B, P> codec,
+			Direction direction) {
 		TESConstants.NETWORKING.registerPacketInternal(payloadType, codec, direction);
 	}
 
-	static <B extends FriendlyByteBuf, P extends MultiloaderConfigurationPacket> void registerConfigurationPacket(CustomPacketPayload.Type<P> payloadType, StreamCodec<B, P> codec, Direction direction) {
+	@ApiStatus.Internal
+	static <B extends FriendlyByteBuf, P extends MultiloaderConfigurationPacket> void registerConfigurationPacket(
+			CustomPacketPayload.Type<P> payloadType,
+			StreamCodec<B, P> codec,
+			Direction direction) {
 		TESConstants.NETWORKING.registerConfigurationPacketInternal(payloadType, codec, direction);
 	}
 
 	@ApiStatus.Internal
-	<B extends FriendlyByteBuf, P extends MultiloaderConfigurationPacket> void registerConfigurationPacketInternal(CustomPacketPayload.Type<P> payloadType, StreamCodec<B, P> codec, Direction direction);
+	<B extends FriendlyByteBuf, P extends MultiloaderConfigurationPacket> void registerConfigurationPacketInternal(
+			CustomPacketPayload.Type<P> payloadType,
+			StreamCodec<B, P> codec,
+			Direction direction);
 
 	@ApiStatus.Internal
-	<B extends FriendlyByteBuf, P extends MultiloaderPacket> void registerPacketInternal(CustomPacketPayload.Type<P> payloadType, StreamCodec<B, P> codec, Direction direction);
+	<B extends FriendlyByteBuf, P extends MultiloaderPacket> void registerPacketInternal(
+			CustomPacketPayload.Type<P> payloadType,
+			StreamCodec<B, P> codec,
+			Direction direction);
 
 	public enum Direction {
 		SERVERBOUND,
